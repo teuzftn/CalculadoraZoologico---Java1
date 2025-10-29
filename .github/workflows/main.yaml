@@ -1,0 +1,32 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Compilar o código
+        run: |
+          mkdir -p out
+          find src -name "*.java" > sources.txt
+          javac -d out @sources.txt
+
+      - name: Executar testes
+        run: |
+          echo "Ajuste este passo conforme seus testes"
+          
